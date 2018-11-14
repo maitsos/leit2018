@@ -42,12 +42,9 @@ The streams of each process are held in the file table of the P\+CB of the proce
 Streams are connected to devices by virtue of a {\ttfamily \hyperlink{structfile__operations}{file\+\_\+operations}} object, which provides pointers to device-\/specific implementations for read, write and close. 
 
 \subsection{Typedef Documentation}
-\mbox{\Hypertarget{group__streams_ga0c7e751afb9d6cadebf070961804d400}\label{group__streams_ga0c7e751afb9d6cadebf070961804d400}} 
 \index{Streams.@{Streams.}!F\+CB@{F\+CB}}
 \index{F\+CB@{F\+CB}!Streams.@{Streams.}}
-\subsubsection{\texorpdfstring{F\+CB}{FCB}}
-{\footnotesize\ttfamily typedef struct \hyperlink{structfile__control__block}{file\+\_\+control\+\_\+block}  \hyperlink{group__streams_ga0c7e751afb9d6cadebf070961804d400}{F\+CB}}
-
+\subsubsection[{\texorpdfstring{F\+CB}{FCB}}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf file\+\_\+control\+\_\+block}  {\bf F\+CB}}\hypertarget{group__streams_ga0c7e751afb9d6cadebf070961804d400}{}\label{group__streams_ga0c7e751afb9d6cadebf070961804d400}
 
 
 The file control block. 
@@ -55,12 +52,13 @@ The file control block.
 A file control block provides a uniform object to the system calls, and contains pointers to device-\/specific functions. 
 
 \subsection{Function Documentation}
-\mbox{\Hypertarget{group__streams_ga26586eafc28dd1f2ac5bc7402922aa36}\label{group__streams_ga26586eafc28dd1f2ac5bc7402922aa36}} 
 \index{Streams.@{Streams.}!F\+C\+B\+\_\+decref@{F\+C\+B\+\_\+decref}}
 \index{F\+C\+B\+\_\+decref@{F\+C\+B\+\_\+decref}!Streams.@{Streams.}}
-\subsubsection{\texorpdfstring{F\+C\+B\+\_\+decref()}{FCB\_decref()}}
-{\footnotesize\ttfamily int F\+C\+B\+\_\+decref (\begin{DoxyParamCaption}\item[{\hyperlink{group__streams_ga0c7e751afb9d6cadebf070961804d400}{F\+CB} $\ast$}]{fcb }\end{DoxyParamCaption})}
-
+\subsubsection[{\texorpdfstring{F\+C\+B\+\_\+decref(\+F\+C\+B $\ast$fcb)}{FCB_decref(FCB *fcb)}}]{\setlength{\rightskip}{0pt plus 5cm}int F\+C\+B\+\_\+decref (
+\begin{DoxyParamCaption}
+\item[{{\bf F\+CB} $\ast$}]{fcb}
+\end{DoxyParamCaption}
+)}\hypertarget{group__streams_ga26586eafc28dd1f2ac5bc7402922aa36}{}\label{group__streams_ga26586eafc28dd1f2ac5bc7402922aa36}
 
 
 Decrease the reference count of the fcb. 
@@ -79,12 +77,13 @@ if the reference count is still $>$0, return 0, else return the value returned b
 
 Definition at line 50 of file kernel\+\_\+streams.\+c.
 
-\mbox{\Hypertarget{group__streams_ga409efca0b415dfdabe868c292d1daf66}\label{group__streams_ga409efca0b415dfdabe868c292d1daf66}} 
 \index{Streams.@{Streams.}!F\+C\+B\+\_\+incref@{F\+C\+B\+\_\+incref}}
 \index{F\+C\+B\+\_\+incref@{F\+C\+B\+\_\+incref}!Streams.@{Streams.}}
-\subsubsection{\texorpdfstring{F\+C\+B\+\_\+incref()}{FCB\_incref()}}
-{\footnotesize\ttfamily void F\+C\+B\+\_\+incref (\begin{DoxyParamCaption}\item[{\hyperlink{group__streams_ga0c7e751afb9d6cadebf070961804d400}{F\+CB} $\ast$}]{fcb }\end{DoxyParamCaption})}
-
+\subsubsection[{\texorpdfstring{F\+C\+B\+\_\+incref(\+F\+C\+B $\ast$fcb)}{FCB_incref(FCB *fcb)}}]{\setlength{\rightskip}{0pt plus 5cm}void F\+C\+B\+\_\+incref (
+\begin{DoxyParamCaption}
+\item[{{\bf F\+CB} $\ast$}]{fcb}
+\end{DoxyParamCaption}
+)}\hypertarget{group__streams_ga409efca0b415dfdabe868c292d1daf66}{}\label{group__streams_ga409efca0b415dfdabe868c292d1daf66}
 
 
 Increase the reference count of an fcb. 
@@ -98,12 +97,15 @@ Increase the reference count of an fcb.
 
 Definition at line 44 of file kernel\+\_\+streams.\+c.
 
-\mbox{\Hypertarget{group__streams_ga462269376de145171b87b7bc3036e4f8}\label{group__streams_ga462269376de145171b87b7bc3036e4f8}} 
 \index{Streams.@{Streams.}!F\+C\+B\+\_\+reserve@{F\+C\+B\+\_\+reserve}}
 \index{F\+C\+B\+\_\+reserve@{F\+C\+B\+\_\+reserve}!Streams.@{Streams.}}
-\subsubsection{\texorpdfstring{F\+C\+B\+\_\+reserve()}{FCB\_reserve()}}
-{\footnotesize\ttfamily int F\+C\+B\+\_\+reserve (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{num,  }\item[{\hyperlink{group__syscalls_ga5097222c5f0da97d92d4712359abc38f}{Fid\+\_\+t} $\ast$}]{fid,  }\item[{\hyperlink{group__streams_ga0c7e751afb9d6cadebf070961804d400}{F\+CB} $\ast$$\ast$}]{fcb }\end{DoxyParamCaption})}
-
+\subsubsection[{\texorpdfstring{F\+C\+B\+\_\+reserve(size\+\_\+t num, Fid\+\_\+t $\ast$fid, F\+C\+B $\ast$$\ast$fcb)}{FCB_reserve(size_t num, Fid_t *fid, FCB **fcb)}}]{\setlength{\rightskip}{0pt plus 5cm}int F\+C\+B\+\_\+reserve (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{num, }
+\item[{{\bf Fid\+\_\+t} $\ast$}]{fid, }
+\item[{{\bf F\+CB} $\ast$$\ast$}]{fcb}
+\end{DoxyParamCaption}
+)}\hypertarget{group__streams_ga462269376de145171b87b7bc3036e4f8}{}\label{group__streams_ga462269376de145171b87b7bc3036e4f8}
 
 
 Acquire a number of F\+C\+Bs and corresponding fids. 
@@ -128,12 +130,15 @@ If these resources are not needed, the operation can be reversed by calling \hyp
 
 Definition at line 65 of file kernel\+\_\+streams.\+c.
 
-\mbox{\Hypertarget{group__streams_gac44c094845a8d4e2e13f9df5b17274df}\label{group__streams_gac44c094845a8d4e2e13f9df5b17274df}} 
 \index{Streams.@{Streams.}!F\+C\+B\+\_\+unreserve@{F\+C\+B\+\_\+unreserve}}
 \index{F\+C\+B\+\_\+unreserve@{F\+C\+B\+\_\+unreserve}!Streams.@{Streams.}}
-\subsubsection{\texorpdfstring{F\+C\+B\+\_\+unreserve()}{FCB\_unreserve()}}
-{\footnotesize\ttfamily void F\+C\+B\+\_\+unreserve (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{num,  }\item[{\hyperlink{group__syscalls_ga5097222c5f0da97d92d4712359abc38f}{Fid\+\_\+t} $\ast$}]{fid,  }\item[{\hyperlink{group__streams_ga0c7e751afb9d6cadebf070961804d400}{F\+CB} $\ast$$\ast$}]{fcb }\end{DoxyParamCaption})}
-
+\subsubsection[{\texorpdfstring{F\+C\+B\+\_\+unreserve(size\+\_\+t num, Fid\+\_\+t $\ast$fid, F\+C\+B $\ast$$\ast$fcb)}{FCB_unreserve(size_t num, Fid_t *fid, FCB **fcb)}}]{\setlength{\rightskip}{0pt plus 5cm}void F\+C\+B\+\_\+unreserve (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{num, }
+\item[{{\bf Fid\+\_\+t} $\ast$}]{fid, }
+\item[{{\bf F\+CB} $\ast$$\ast$}]{fcb}
+\end{DoxyParamCaption}
+)}\hypertarget{group__streams_gac44c094845a8d4e2e13f9df5b17274df}{}\label{group__streams_gac44c094845a8d4e2e13f9df5b17274df}
 
 
 Release a number of F\+C\+Bs and corresponding fids. 
@@ -157,12 +162,13 @@ This function does not check its arguments for correctness. Use only with arrays
 
 Definition at line 101 of file kernel\+\_\+streams.\+c.
 
-\mbox{\Hypertarget{group__streams_ga36b4f172aba29ba2660d0aed0f10d60b}\label{group__streams_ga36b4f172aba29ba2660d0aed0f10d60b}} 
 \index{Streams.@{Streams.}!get\+\_\+fcb@{get\+\_\+fcb}}
 \index{get\+\_\+fcb@{get\+\_\+fcb}!Streams.@{Streams.}}
-\subsubsection{\texorpdfstring{get\+\_\+fcb()}{get\_fcb()}}
-{\footnotesize\ttfamily \hyperlink{group__streams_ga0c7e751afb9d6cadebf070961804d400}{F\+CB}$\ast$ get\+\_\+fcb (\begin{DoxyParamCaption}\item[{\hyperlink{group__syscalls_ga5097222c5f0da97d92d4712359abc38f}{Fid\+\_\+t}}]{fid }\end{DoxyParamCaption})}
-
+\subsubsection[{\texorpdfstring{get\+\_\+fcb(\+Fid\+\_\+t fid)}{get_fcb(Fid_t fid)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf F\+CB}$\ast$ get\+\_\+fcb (
+\begin{DoxyParamCaption}
+\item[{{\bf Fid\+\_\+t}}]{fid}
+\end{DoxyParamCaption}
+)}\hypertarget{group__streams_ga36b4f172aba29ba2660d0aed0f10d60b}{}\label{group__streams_ga36b4f172aba29ba2660d0aed0f10d60b}
 
 
 Translate an fid to an F\+CB. 
@@ -181,12 +187,13 @@ a pointer to the corresponding F\+CB, or N\+U\+LL.
 
 Definition at line 123 of file kernel\+\_\+streams.\+c.
 
-\mbox{\Hypertarget{group__streams_ga147537248d983b0cc6cc7e8b39245f09}\label{group__streams_ga147537248d983b0cc6cc7e8b39245f09}} 
 \index{Streams.@{Streams.}!initialize\+\_\+files@{initialize\+\_\+files}}
 \index{initialize\+\_\+files@{initialize\+\_\+files}!Streams.@{Streams.}}
-\subsubsection{\texorpdfstring{initialize\+\_\+files()}{initialize\_files()}}
-{\footnotesize\ttfamily void initialize\+\_\+files (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
+\subsubsection[{\texorpdfstring{initialize\+\_\+files()}{initialize_files()}}]{\setlength{\rightskip}{0pt plus 5cm}void initialize\+\_\+files (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{group__streams_ga147537248d983b0cc6cc7e8b39245f09}{}\label{group__streams_ga147537248d983b0cc6cc7e8b39245f09}
 
 
 Initialization for files and streams. 

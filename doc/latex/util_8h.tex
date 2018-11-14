@@ -5,13 +5,14 @@
 Tinyos utility code.  
 
 
-{\ttfamily \#include $<$stdlib.\+h$>$}\newline
-{\ttfamily \#include $<$stdio.\+h$>$}\newline
-{\ttfamily \#include $<$stdint.\+h$>$}\newline
-{\ttfamily \#include $<$string.\+h$>$}\newline
-{\ttfamily \#include $<$errno.\+h$>$}\newline
-{\ttfamily \#include $<$setjmp.\+h$>$}\newline
-{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$stdint.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include $<$errno.\+h$>$}\\*
+{\ttfamily \#include $<$setjmp.\+h$>$}\\*
+{\ttfamily \#include $<$assert.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}tinyos.\+h\char`\"{}}\\*
 Include dependency graph for util.\+h\+:
 % FIG 0
 This graph shows which files directly or indirectly include this file\+:
@@ -78,6 +79,8 @@ static \hyperlink{group__rlists_ga8f6244877f7ce2322c90525217ea6e7a}{rlnode} $\as
 \begin{DoxyCompactList}\small\item\em Initialize a node as a singleton ring. \end{DoxyCompactList}\item 
 static \hyperlink{group__rlists_ga8f6244877f7ce2322c90525217ea6e7a}{rlnode} $\ast$ \hyperlink{group__rlists_ga578e6dc256d4f1580bd8500edf374aca}{rlnode\+\_\+init} (\hyperlink{group__rlists_ga8f6244877f7ce2322c90525217ea6e7a}{rlnode} $\ast$p, void $\ast$ptr)
 \begin{DoxyCompactList}\small\item\em Initialize a node as a singleton ring. \end{DoxyCompactList}\item 
+static \hyperlink{group__rlists_ga8f6244877f7ce2322c90525217ea6e7a}{rlnode} $\ast$ {\bfseries rlnode\+\_\+array\+\_\+init} (\hyperlink{group__rlists_ga8f6244877f7ce2322c90525217ea6e7a}{rlnode} $\ast$p, void $\ast$ptr)
+\item 
 static void \hyperlink{group__rlists_ga47c4de39ce6c032dd9fc23c88a883a4b}{rlnode\+\_\+swap} (\hyperlink{group__rlists_gaae2ea9be18d20f0c80a62a2f8e2eed4d}{rlnode\+\_\+ptr} $\ast$p, \hyperlink{group__rlists_gaae2ea9be18d20f0c80a62a2f8e2eed4d}{rlnode\+\_\+ptr} $\ast$q)
 \begin{DoxyCompactList}\small\item\em Swap two pointers to rlnode. \end{DoxyCompactList}\item 
 static \hyperlink{group__rlists_ga8f6244877f7ce2322c90525217ea6e7a}{rlnode} $\ast$ \hyperlink{group__rlists_gac04dfecc68239457f673c0a63c254541}{rl\+\_\+splice} (\hyperlink{group__rlists_ga8f6244877f7ce2322c90525217ea6e7a}{rlnode} $\ast$a, \hyperlink{group__rlists_ga8f6244877f7ce2322c90525217ea6e7a}{rlnode} $\ast$b)
@@ -140,12 +143,13 @@ This file defines the following\+:
 \subsubsection*{Resource list }
 
 \subsection{Macro Definition Documentation}
-\mbox{\Hypertarget{util_8h_af343c484a1e3247f669b832f6cb0fce6}\label{util_8h_af343c484a1e3247f669b832f6cb0fce6}} 
 \index{util.\+h@{util.\+h}!F\+I\+N\+A\+L\+LY@{F\+I\+N\+A\+L\+LY}}
 \index{F\+I\+N\+A\+L\+LY@{F\+I\+N\+A\+L\+LY}!util.\+h@{util.\+h}}
-\subsubsection{\texorpdfstring{F\+I\+N\+A\+L\+LY}{FINALLY}}
-{\footnotesize\ttfamily \#define F\+I\+N\+A\+L\+LY(\begin{DoxyParamCaption}\item[{}]{excname }\end{DoxyParamCaption})}
-
+\subsubsection[{\texorpdfstring{F\+I\+N\+A\+L\+LY}{FINALLY}}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\+I\+N\+A\+L\+LY(
+\begin{DoxyParamCaption}
+\item[{}]{excname}
+\end{DoxyParamCaption}
+)}\hypertarget{util_8h_af343c484a1e3247f669b832f6cb0fce6}{}\label{util_8h_af343c484a1e3247f669b832f6cb0fce6}
 {\bfseries Value\+:}
 \begin{DoxyCode}
 \textcolor{keyword}{struct }\hyperlink{structexception__handler__frame}{exception\_handler\_frame} \_\_conc(\_\_xframe\_,\_\_LINE\_\_);\(\backslash\)
@@ -158,14 +162,11 @@ This file defines the following\+:
 \end{DoxyCode}
 
 
-Definition at line 935 of file util.\+h.
+Definition at line 944 of file util.\+h.
 
-\mbox{\Hypertarget{util_8h_ab5034f048fef6a41e7901a4e34368f3d}\label{util_8h_ab5034f048fef6a41e7901a4e34368f3d}} 
 \index{util.\+h@{util.\+h}!O\+N\+\_\+\+E\+R\+R\+OR@{O\+N\+\_\+\+E\+R\+R\+OR}}
 \index{O\+N\+\_\+\+E\+R\+R\+OR@{O\+N\+\_\+\+E\+R\+R\+OR}!util.\+h@{util.\+h}}
-\subsubsection{\texorpdfstring{O\+N\+\_\+\+E\+R\+R\+OR}{ON\_ERROR}}
-{\footnotesize\ttfamily \#define O\+N\+\_\+\+E\+R\+R\+OR}
-
+\subsubsection[{\texorpdfstring{O\+N\+\_\+\+E\+R\+R\+OR}{ON_ERROR}}]{\setlength{\rightskip}{0pt plus 5cm}\#define O\+N\+\_\+\+E\+R\+R\+OR}\hypertarget{util_8h_ab5034f048fef6a41e7901a4e34368f3d}{}\label{util_8h_ab5034f048fef6a41e7901a4e34368f3d}
 {\bfseries Value\+:}
 \begin{DoxyCode}
 \textcolor{keyword}{struct }\hyperlink{structexception__handler__frame}{exception\_handler\_frame} \_\_conc(\_\_xframe\_,\_\_LINE\_\_);\(\backslash\)
@@ -178,14 +179,15 @@ Definition at line 935 of file util.\+h.
 \end{DoxyCode}
 
 
-Definition at line 945 of file util.\+h.
+Definition at line 954 of file util.\+h.
 
-\mbox{\Hypertarget{util_8h_a6dbafe1c80b34213de23960742a82ca1}\label{util_8h_a6dbafe1c80b34213de23960742a82ca1}} 
 \index{util.\+h@{util.\+h}!T\+R\+Y\+\_\+\+W\+I\+TH@{T\+R\+Y\+\_\+\+W\+I\+TH}}
 \index{T\+R\+Y\+\_\+\+W\+I\+TH@{T\+R\+Y\+\_\+\+W\+I\+TH}!util.\+h@{util.\+h}}
-\subsubsection{\texorpdfstring{T\+R\+Y\+\_\+\+W\+I\+TH}{TRY\_WITH}}
-{\footnotesize\ttfamily \#define T\+R\+Y\+\_\+\+W\+I\+TH(\begin{DoxyParamCaption}\item[{}]{context }\end{DoxyParamCaption})}
-
+\subsubsection[{\texorpdfstring{T\+R\+Y\+\_\+\+W\+I\+TH}{TRY_WITH}}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\+R\+Y\+\_\+\+W\+I\+TH(
+\begin{DoxyParamCaption}
+\item[{}]{context}
+\end{DoxyParamCaption}
+)}\hypertarget{util_8h_a6dbafe1c80b34213de23960742a82ca1}{}\label{util_8h_a6dbafe1c80b34213de23960742a82ca1}
 {\bfseries Value\+:}
 \begin{DoxyCode}
 \textcolor{keyword}{struct }\hyperlink{structexception__stack__frame}{exception\_stack\_frame} \_\_conc(\_\_try\_,\_\_LINE\_\_) = \(\backslash\)
@@ -200,17 +202,19 @@ Definition at line 945 of file util.\+h.
 \end{DoxyCode}
 
 
-Definition at line 924 of file util.\+h.
+Definition at line 933 of file util.\+h.
 
 
 
 \subsection{Function Documentation}
-\mbox{\Hypertarget{util_8h_a97bcca5a76c0b621981e80cfb618a73d}\label{util_8h_a97bcca5a76c0b621981e80cfb618a73d}} 
 \index{util.\+h@{util.\+h}!argscount@{argscount}}
 \index{argscount@{argscount}!util.\+h@{util.\+h}}
-\subsubsection{\texorpdfstring{argscount()}{argscount()}}
-{\footnotesize\ttfamily static size\+\_\+t argscount (\begin{DoxyParamCaption}\item[{int}]{argl,  }\item[{void $\ast$}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
-
+\subsubsection[{\texorpdfstring{argscount(int argl, void $\ast$args)}{argscount(int argl, void *args)}}]{\setlength{\rightskip}{0pt plus 5cm}static size\+\_\+t argscount (
+\begin{DoxyParamCaption}
+\item[{int}]{argl, }
+\item[{void $\ast$}]{args}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{util_8h_a97bcca5a76c0b621981e80cfb618a73d}{}\label{util_8h_a97bcca5a76c0b621981e80cfb618a73d}
 
 
 Return the number of strings packed in an argument buffer. 
@@ -229,14 +233,16 @@ the number of strings packed in {\ttfamily args}
 \end{DoxyReturn}
 
 
-Definition at line 635 of file util.\+h.
+Definition at line 644 of file util.\+h.
 
-\mbox{\Hypertarget{util_8h_a7a9791238730610435f0e56f3c9e9d5a}\label{util_8h_a7a9791238730610435f0e56f3c9e9d5a}} 
 \index{util.\+h@{util.\+h}!argvlen@{argvlen}}
 \index{argvlen@{argvlen}!util.\+h@{util.\+h}}
-\subsubsection{\texorpdfstring{argvlen()}{argvlen()}}
-{\footnotesize\ttfamily static size\+\_\+t argvlen (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{argc,  }\item[{const char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
-
+\subsubsection[{\texorpdfstring{argvlen(size\+\_\+t argc, const char $\ast$$\ast$argv)}{argvlen(size_t argc, const char **argv)}}]{\setlength{\rightskip}{0pt plus 5cm}static size\+\_\+t argvlen (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{argc, }
+\item[{const char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{util_8h_a7a9791238730610435f0e56f3c9e9d5a}{}\label{util_8h_a7a9791238730610435f0e56f3c9e9d5a}
 
 
 Return the total length of a string array. 
@@ -253,14 +259,17 @@ the total number of bytes in all the strings, including the terminating zeros.
 \end{DoxyReturn}
 
 
-Definition at line 592 of file util.\+h.
+Definition at line 601 of file util.\+h.
 
-\mbox{\Hypertarget{util_8h_a17795e528244cffd51a5935d8c5f2a74}\label{util_8h_a17795e528244cffd51a5935d8c5f2a74}} 
 \index{util.\+h@{util.\+h}!argvpack@{argvpack}}
 \index{argvpack@{argvpack}!util.\+h@{util.\+h}}
-\subsubsection{\texorpdfstring{argvpack()}{argvpack()}}
-{\footnotesize\ttfamily static size\+\_\+t argvpack (\begin{DoxyParamCaption}\item[{void $\ast$}]{args,  }\item[{size\+\_\+t}]{argc,  }\item[{const char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
-
+\subsubsection[{\texorpdfstring{argvpack(void $\ast$args, size\+\_\+t argc, const char $\ast$$\ast$argv)}{argvpack(void *args, size_t argc, const char **argv)}}]{\setlength{\rightskip}{0pt plus 5cm}static size\+\_\+t argvpack (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{args, }
+\item[{size\+\_\+t}]{argc, }
+\item[{const char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{util_8h_a17795e528244cffd51a5935d8c5f2a74}{}\label{util_8h_a17795e528244cffd51a5935d8c5f2a74}
 
 
 Pack a string array into an argument buffer. 
@@ -284,14 +293,18 @@ the length of the output argument buffer
 \end{DoxySeeAlso}
 
 
-Definition at line 614 of file util.\+h.
+Definition at line 623 of file util.\+h.
 
-\mbox{\Hypertarget{util_8h_aef7e8ed491979281a8ca2bcfcbaf852f}\label{util_8h_aef7e8ed491979281a8ca2bcfcbaf852f}} 
 \index{util.\+h@{util.\+h}!argvunpack@{argvunpack}}
 \index{argvunpack@{argvunpack}!util.\+h@{util.\+h}}
-\subsubsection{\texorpdfstring{argvunpack()}{argvunpack()}}
-{\footnotesize\ttfamily static void$\ast$ argvunpack (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{argc,  }\item[{const char $\ast$$\ast$}]{argv,  }\item[{int}]{argl,  }\item[{void $\ast$}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
-
+\subsubsection[{\texorpdfstring{argvunpack(size\+\_\+t argc, const char $\ast$$\ast$argv, int argl, void $\ast$args)}{argvunpack(size_t argc, const char **argv, int argl, void *args)}}]{\setlength{\rightskip}{0pt plus 5cm}static void$\ast$ argvunpack (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{argc, }
+\item[{const char $\ast$$\ast$}]{argv, }
+\item[{int}]{argl, }
+\item[{void $\ast$}]{args}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{util_8h_aef7e8ed491979281a8ca2bcfcbaf852f}{}\label{util_8h_aef7e8ed491979281a8ca2bcfcbaf852f}
 
 
 Unpack a string array from an argument buffer. 
@@ -317,5 +330,5 @@ the first location not unpacked
 \end{DoxySeeAlso}
 
 
-Definition at line 659 of file util.\+h.
+Definition at line 668 of file util.\+h.
 

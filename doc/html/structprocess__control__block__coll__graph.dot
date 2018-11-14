@@ -13,7 +13,7 @@ digraph "process_control_block"
   Node4 -> Node3 [color="grey25",fontsize="10",style="solid",label=" +ccb" ,arrowhead="odiamond",fontname="Helvetica"];
   Node4 [label="{core_control_block\n|+ id\l+ preemption\l|}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structcore__control__block.html",tooltip="Core control block. "];
   Node5 -> Node4 [color="grey25",fontsize="10",style="solid",label=" +idle_thread\n+current_thread" ,arrowhead="odiamond",fontname="Helvetica"];
-  Node5 [label="{thread_control_block\n|+ context\l+ valgrind_stack_id\l+ type\l+ state\l+ phase\l+ thread_func\l+ wakeup_time\l|}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structthread__control__block.html",tooltip="The thread control block. "];
+  Node5 [label="{thread_control_block\n|+ context\l+ valgrind_stack_id\l+ type\l+ state\l+ phase\l+ priority\l+ thread_func\l+ wakeup_time\l|}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structthread__control__block.html",tooltip="The thread control block. "];
   Node1 -> Node5 [color="grey25",fontsize="10",style="solid",label=" +owner_pcb" ,arrowhead="odiamond",fontname="Helvetica"];
   Node3 -> Node5 [color="grey25",fontsize="10",style="solid",label=" +sched_node" ,arrowhead="odiamond",fontname="Helvetica"];
   Node5 -> Node5 [color="grey25",fontsize="10",style="solid",label=" +prev\n+next" ,arrowhead="odiamond",fontname="Helvetica"];
