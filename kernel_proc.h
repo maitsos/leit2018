@@ -40,15 +40,12 @@ typedef struct process_control_block {
 
   PCB* parent;            /**< Parent's pcb. */
   int exitval;            /**< The exit value */
-  PTCB* main_ptcb;
+
   TCB* main_thread;       /**< The main thread */
   Task main_task;         /**< The main thread's function */
   int argl;               /**< The main thread's argument length */
   void* args;             /**< The main thread's argument string */
 
-  //int t_counter; //allagmeno : Thread counter 
-  rlnode PTCB_list; //allagmeno 
-  
   rlnode children_list;   /**< List of children */
   rlnode exited_list;     /**< List of exited children */
 
@@ -93,11 +90,6 @@ PCB* get_pcb(Pid_t pid);
 */
 Pid_t get_pid(PCB* pcb);
 
-//allagmeno
-void start_main_thread(void);
-
-//allagmeno
-void start_PTCB_thread(void);
 /** @} */
 
 #endif

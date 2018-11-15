@@ -18,7 +18,7 @@ digraph "__rs_globals"
   Node6 -> Node5 [color="grey25",fontsize="10",style="solid",label=" +streamfunc" ,arrowhead="odiamond",fontname="Helvetica"];
   Node6 [label="{file_operations\n|+ Open\l+ Read\l+ Write\l+ Close\l|}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structfile__operations.html",tooltip="The device-specific file operations table. "];
   Node7 -> Node4 [color="grey25",fontsize="10",style="solid",label=" +main_thread" ,arrowhead="odiamond",fontname="Helvetica"];
-  Node7 [label="{thread_control_block\n|+ context\l+ valgrind_stack_id\l+ type\l+ state\l+ phase\l+ priority\l+ thread_func\l+ wakeup_time\l|}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structthread__control__block.html",tooltip="The thread control block. "];
+  Node7 [label="{thread_control_block\n|+ context\l+ valgrind_stack_id\l+ type\l+ state\l+ phase\l+ thread_func\l+ wakeup_time\l|}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structthread__control__block.html",tooltip="The thread control block. "];
   Node4 -> Node7 [color="grey25",fontsize="10",style="solid",label=" +owner_pcb" ,arrowhead="odiamond",fontname="Helvetica"];
   Node3 -> Node7 [color="grey25",fontsize="10",style="solid",label=" +sched_node" ,arrowhead="odiamond",fontname="Helvetica"];
   Node7 -> Node7 [color="grey25",fontsize="10",style="solid",label=" +prev\n+next" ,arrowhead="odiamond",fontname="Helvetica"];

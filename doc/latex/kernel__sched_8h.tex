@@ -5,9 +5,9 @@
 Tiny\+OS kernel\+: The Scheduler A\+PI.  
 
 
-{\ttfamily \#include \char`\"{}util.\+h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}bios.\+h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}tinyos.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}util.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}bios.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tinyos.\+h\char`\"{}}\newline
 Include dependency graph for kernel\+\_\+sched.\+h\+:
 % FIG 0
 This graph shows which files directly or indirectly include this file\+:
@@ -44,12 +44,12 @@ typedef struct \hyperlink{structcore__control__block}{core\+\_\+control\+\_\+blo
 \subsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
-enum \hyperlink{group__scheduler_ga6c969c169777f82c104cf73e501df70f}{Thread\+\_\+state} \{ \\*
+enum \hyperlink{group__scheduler_ga6c969c169777f82c104cf73e501df70f}{Thread\+\_\+state} \{ \newline
 \hyperlink{group__scheduler_gga6c969c169777f82c104cf73e501df70fa0cb1b2c6a7db1f1084886c98909a3f36}{I\+N\+IT}, 
 \hyperlink{group__scheduler_gga6c969c169777f82c104cf73e501df70fa6564f2f3e15be06b670547bbcaaf0798}{R\+E\+A\+DY}, 
 \hyperlink{group__scheduler_gga6c969c169777f82c104cf73e501df70fa1061be6c3fb88d32829cba6f6b2be304}{R\+U\+N\+N\+I\+NG}, 
 \hyperlink{group__scheduler_gga6c969c169777f82c104cf73e501df70fa948b2aee15f52b421fa4770c47bcfe8c}{S\+T\+O\+P\+P\+ED}, 
-\\*
+\newline
 \hyperlink{group__scheduler_gga6c969c169777f82c104cf73e501df70fab9f9543350f6bd6191e52158daa88884}{E\+X\+I\+T\+ED}
  \}\begin{DoxyCompactList}\small\item\em Thread state. \end{DoxyCompactList}
 \item 
@@ -61,12 +61,12 @@ enum \hyperlink{group__scheduler_ga18795bc1ab00161fc27ce34b1895fb03}{Thread\+\_\
 \hyperlink{group__scheduler_gga18795bc1ab00161fc27ce34b1895fb03a1d3bb8be1deb6ac7be94fea88e1ed76b}{N\+O\+R\+M\+A\+L\+\_\+\+T\+H\+R\+E\+AD}
  \}\begin{DoxyCompactList}\small\item\em Thread type. \end{DoxyCompactList}
 \item 
-enum \hyperlink{group__scheduler_gaad787d8d80312ffca3c0f197b3a25fbe}{S\+C\+H\+E\+D\+\_\+\+C\+A\+U\+SE} \{ \\*
+enum \hyperlink{group__scheduler_gaad787d8d80312ffca3c0f197b3a25fbe}{S\+C\+H\+E\+D\+\_\+\+C\+A\+U\+SE} \{ \newline
 \hyperlink{group__scheduler_ggaad787d8d80312ffca3c0f197b3a25fbea99764e3e8f3195b33e888c816c9a0207}{S\+C\+H\+E\+D\+\_\+\+Q\+U\+A\+N\+T\+UM}, 
 \hyperlink{group__scheduler_ggaad787d8d80312ffca3c0f197b3a25fbeaa19b25dfae8d75a5900bb23a1f6c64d8}{S\+C\+H\+E\+D\+\_\+\+IO}, 
 \hyperlink{group__scheduler_ggaad787d8d80312ffca3c0f197b3a25fbea7d3764881e09d1f0dbf2d8ef09640a37}{S\+C\+H\+E\+D\+\_\+\+M\+U\+T\+EX}, 
 \hyperlink{group__scheduler_ggaad787d8d80312ffca3c0f197b3a25fbea5f78cf7f43e406215d39f936fa99fd5a}{S\+C\+H\+E\+D\+\_\+\+P\+I\+PE}, 
-\\*
+\newline
 \hyperlink{group__scheduler_ggaad787d8d80312ffca3c0f197b3a25fbea1b7d43bbe4e4eb4089beb28b2c8f7e50}{S\+C\+H\+E\+D\+\_\+\+P\+O\+LL}, 
 \hyperlink{group__scheduler_ggaad787d8d80312ffca3c0f197b3a25fbea525b9af8477ce2505c0d559940d827e5}{S\+C\+H\+E\+D\+\_\+\+I\+D\+LE}, 
 \hyperlink{group__scheduler_ggaad787d8d80312ffca3c0f197b3a25fbea9ead280a8852a73f1ba3368d66338275}{S\+C\+H\+E\+D\+\_\+\+U\+S\+ER}

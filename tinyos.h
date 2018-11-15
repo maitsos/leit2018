@@ -52,11 +52,6 @@ typedef int Fid_t;
 /** @brief The invalid file id. */
 #define NOFILE  (-1)
 
-//allagmeno 
-#define MLFQ_SIZE 10
-extern int boost_param;
-//static int yield_counter = 0;
-//static int boost_counter = 0;
 
 /**
   @brief The type of a thread ID.
@@ -207,7 +202,6 @@ void Cond_Signal(CondVar*);
 void Cond_Broadcast(CondVar*); 
 
 
-
 /*******************************************
  *
  * Process creation
@@ -323,9 +317,7 @@ Pid_t GetPPid(void);
   @param task a function to execute
 
   */
-
 Tid_t CreateThread(Task task, int argl, void* args);
-
 
 /**
   @brief Return the Tid of the current thread.
@@ -350,7 +342,7 @@ Tid_t ThreadSelf();
 
   @param tid the thread to join
   @param exitval a location where to store the exit value of the joined 
-  thread. If NULL, the exit status is not returned.
+              thread. If NULL, the exit status is not returned.
   @returns 0 on success and -1 on error. Possible errors are:
     - there is no thread with the given tid in this process.
     - the tid corresponds to the current thread.

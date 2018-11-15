@@ -13,7 +13,7 @@ digraph "file_control_block"
   Node2 -> Node3 [color="grey25",fontsize="10",style="solid",label=" +children_node\n+children_list\n+exited_node\n+exited_list" ,arrowhead="odiamond",fontname="Helvetica"];
   Node1 -> Node3 [color="grey25",fontsize="10",style="solid",label=" +FIDT" ,arrowhead="odiamond",fontname="Helvetica"];
   Node5 -> Node3 [color="grey25",fontsize="10",style="solid",label=" +main_thread" ,arrowhead="odiamond",fontname="Helvetica"];
-  Node5 [label="{thread_control_block\n|+ context\l+ valgrind_stack_id\l+ type\l+ state\l+ phase\l+ priority\l+ thread_func\l+ wakeup_time\l|}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structthread__control__block.html",tooltip="The thread control block. "];
+  Node5 [label="{thread_control_block\n|+ context\l+ valgrind_stack_id\l+ type\l+ state\l+ phase\l+ thread_func\l+ wakeup_time\l|}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structthread__control__block.html",tooltip="The thread control block. "];
   Node3 -> Node5 [color="grey25",fontsize="10",style="solid",label=" +owner_pcb" ,arrowhead="odiamond",fontname="Helvetica"];
   Node2 -> Node5 [color="grey25",fontsize="10",style="solid",label=" +sched_node" ,arrowhead="odiamond",fontname="Helvetica"];
   Node5 -> Node5 [color="grey25",fontsize="10",style="solid",label=" +prev\n+next" ,arrowhead="odiamond",fontname="Helvetica"];

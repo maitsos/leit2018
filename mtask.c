@@ -1,9 +1,9 @@
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
 #include <assert.h>
 
-#include "tinyos.h"
 #include "tinyoslib.h"
 #include "symposium.h"
 
@@ -12,6 +12,7 @@
  	A standalone program to launch the Dining Philisophers
  	symposium implementation.
  */
+
 
 /*
  * This is the initial task, which starts all the other tasks (except for the idle task). 
@@ -67,6 +68,7 @@ void usage(const char* pname)
 }
 
 
+
 int FMIN= FBASE;
 int FMAX= FBASE+FGAP;
 
@@ -83,7 +85,7 @@ int main(int argc, const char** argv)
 
   /* check arguments */
 
-  if( (nphil <= 0) || (nphil >  MAX_PROC) ) usage(argv[0]); 
+  if( (nphil <= 0) || (nphil > MAX_PROC) ) usage(argv[0]); 
   if( (bites <= 0) ) usage(argv[0]); 
 
   /* adjust work per fibo call (to adapt to many philosophers/bites) */
@@ -100,4 +102,5 @@ int main(int argc, const char** argv)
 
   return 0;
 }
+
 

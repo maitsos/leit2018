@@ -43,7 +43,7 @@ typedef enum {
     READY,      /**< A thread ready to be scheduled.   */
     RUNNING,    /**< A thread running on some core   */
     STOPPED,    /**< A blocked thread   */
-    EXITED       /**< A terminated thread   */
+    EXITED      /**< A terminated thread   */
   } Thread_state;
 
 /** @brief Thread phase. 
@@ -77,15 +77,7 @@ enum SCHED_CAUSE {
   SCHED_USER      /**< User-space code called yield */
 };
 
-typedef enum {
-  JOINABLE,
-  DETACHED
-} Joinable_state;
 
-typedef enum{
-  P_NOT_EXITED,
-  P_EXITED
-}Exited_state;
 
 /**
   @brief The thread control block
@@ -96,7 +88,6 @@ typedef enum{
 typedef struct thread_control_block
 {
   PCB* owner_pcb;       /**< This is null for a free TCB */
-  PTCB* owner_ptcb; //allagmeno
 
   cpu_context_t context;     /**< The thread context */
 
@@ -107,9 +98,6 @@ typedef struct thread_control_block
   Thread_type type;       /**< The type of thread */
   Thread_state state;    /**< The state of the thread */
   Thread_phase phase;    /**< The phase of the thread */
-  
-  int priority; //allagmeno
-  int aging; //allagmeno
 
   void (*thread_func)();   /**< The function executed by this thread */
 
@@ -122,34 +110,9 @@ typedef struct thread_control_block
 } TCB;
 
 
-PTCB* create_PTCB(Task task, int argl, void* args, PCB* pcb);
-
-
-//allagmeno
-typedef struct process_thread_control_block
-{
-  TCB* main_thread;
-  PCB* owner_pcb;
-  rlnode PTCB_node;
-  
-  Task main_task; 
-  int argl;
-  void* args;
-
-  Joinable_state j_state;
-  Exited_state exit_state;
-  CondVar cv; 
-
-  int ref_counter;
-  int exitval;
-
-} PTCB;
-
 
 /** Thread stack size */
-
 #define THREAD_STACK_SIZE  (128*1024)
-
 
 
 /************************
@@ -195,9 +158,6 @@ extern CCB cctx[MAX_CORES];
 */
 #define CURPROC  (CURTHREAD->owner_pcb)
 
-//allagmeno
-#define CURPTHREAD (CURTHREAD->owner_ptcb)
-#define DEFAULT_EXITVAL 666
 
 /**
   @brief A timeout constant, denoting no timeout for sleep.
@@ -213,14 +173,7 @@ extern CCB cctx[MAX_CORES];
   Note that, the new thread is returned in the @c INIT state.
   The caller must use @c wakeup() to start it.
 */
-
 TCB* spawn_thread(PCB* pcb, void (*func)());
-
-//allagmeno
-void* allocate_thread(size_t size);
-void free_thread(void* ptr, size_t size);
-void release_TCB(TCB* tcb);
-void delete_PTCB(PTCB* ptcb);
 
 /**
   @brief Wakeup a blocked thread.
@@ -283,7 +236,6 @@ void yield(enum SCHED_CAUSE cause);
   to enter the scheduler. When this function returns, the scheduler
   has stopped (there are no more active threads) and the 
 */
-
 void run_scheduler(void); 
 
 /**
@@ -292,6 +244,7 @@ void run_scheduler(void);
    This function is called during kernel initialization.
  */
 void initialize_scheduler(void); 
+
 
 /**
   @brief Quantum (in microseconds) 

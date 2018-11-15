@@ -40,9 +40,6 @@
  */
 
 
-void set_priority(enum SCHED_CAUSE cause, TCB* tcb);
-void set_aging(TCB* tcb);
-
 /* 
   A counter for active threads. By "active", we mean 'existing', 
   with the exception of idle threads (they don't count).
@@ -57,10 +54,6 @@ Mutex active_threads_spinlock = MUTEX_INIT;
 #define THREAD_TCB_SIZE   (((sizeof(TCB)+SYSTEM_PAGE_SIZE-1)/SYSTEM_PAGE_SIZE)*SYSTEM_PAGE_SIZE)
 
 #define THREAD_SIZE  (THREAD_TCB_SIZE+THREAD_STACK_SIZE)
-
-//allagmeno
-int boost_param;
-#define BOOST_THRES (int)(boost_param)
 
 //#define MMAPPED_THREAD_MEM 
 #ifdef MMAPPED_THREAD_MEM 
@@ -105,6 +98,7 @@ void* allocate_thread(size_t size)
 #endif
 
 
+
 /*
   This is the function that is used to start normal threads.
 */
@@ -114,12 +108,12 @@ void gain(int preempt); /* forward */
 static void thread_start()
 {
   gain(1);
-
   CURTHREAD->thread_func();
 
   /* We are not supposed to get here! */
   assert(0);
 }
+
 
 /*
   Initialize and return a new TCB
@@ -129,20 +123,18 @@ TCB* spawn_thread(PCB* pcb, void (*func)())
 {
   /* The allocated thread size must be a multiple of page size */
   TCB* tcb = (TCB*) allocate_thread(THREAD_SIZE);
-  
+
   /* Set the owner */
   tcb->owner_pcb = pcb;
-  tcb->owner_ptcb = NULL;  
 
   /* Initialize the other attributes */
   tcb->type = NORMAL_THREAD;
   tcb->state = INIT;
   tcb->phase = CTX_CLEAN;
-  tcb->priority = MLFQ_SIZE-1; // allagmeno  default entry index of MLFQ array 
-  tcb->aging = 0;
   tcb->thread_func = func;
   tcb->wakeup_time = NO_TIMEOUT;
   rlnode_init(& tcb->sched_node, tcb);  /* Intrusive list node */
+
 
   /* Compute the stack segment address and size */
   void* sp = ((void*)tcb) + THREAD_TCB_SIZE;
@@ -163,6 +155,7 @@ TCB* spawn_thread(PCB* pcb, void (*func)())
   return tcb;
 }
 
+
 /*
   This is called with tcb->state_spinlock locked !
  */
@@ -177,13 +170,6 @@ void release_TCB(TCB* tcb)
   Mutex_Lock(&active_threads_spinlock);
   active_threads--;
   Mutex_Unlock(&active_threads_spinlock);
-}
-
-//allagmeno
-void delete_PTCB(PTCB* ptcb)
-{ 
-  rlist_remove(& ptcb->PTCB_node);
-  free(ptcb);
 }
 
 
@@ -213,10 +199,11 @@ CCB cctx[MAX_CORES];
   Both of these structures are protected by @c sched_spinlock.
 */
 
-rlnode MLFQ[MLFQ_SIZE]; //allagmeno
-                       /* The scheduler queue */
+
+rlnode SCHED;                         /* The scheduler queue */
 rlnode TIMEOUT_LIST;				  /* The list of threads with a timeout */
 Mutex sched_spinlock = MUTEX_INIT;    /* spinlock for scheduler queue */
+
 
 
 /* Interrupt handler for ALARM */
@@ -263,10 +250,8 @@ static void sched_register_timeout(TCB* tcb, TimerDuration timeout)
 */
 static void sched_queue_add(TCB* tcb)
 {
-  //allagmeno 
-  rlist_push_back(& (MLFQ[tcb->priority]), & tcb->sched_node);
   /* Insert at the end of the scheduling list */
-  //rlist_push_back(& SCHED, & tcb->sched_node);
+  rlist_push_back(& SCHED, & tcb->sched_node);
 
   /* Restart possibly halted cores */
   cpu_core_restart_one();
@@ -274,8 +259,7 @@ static void sched_queue_add(TCB* tcb)
 
 
 /*
-
-  Adjust the state of a thread to make it READY.
+	Adjust the state of a thread to make it READY.
 
     *** MUST BE CALLED WITH sched_spinlock HELD ***	
  */
@@ -318,19 +302,12 @@ static TCB* sched_queue_select()
   		sched_make_ready(tcb);
   }
 
-  //allagmeno
-  for(int i =(MLFQ_SIZE-1); i >= 0; i--)
-  {
-    if(!is_rlist_empty(&(MLFQ[i])))
-    {
-      /* Get the head of the SCHED list */
-      rlnode * sel = rlist_pop_front(& (MLFQ[i]));  
-      return (sel->tcb);  /* When the list is empty, this is NULL */
-    }
-  }
-  //allagmeno
- return NULL;
+  /* Get the head of the SCHED list */
+  rlnode * sel = rlist_pop_front(& SCHED);
+
+  return sel->tcb;  /* When the list is empty, this is NULL */
 } 
+
 
 /*
   Make the process ready. 
@@ -349,6 +326,7 @@ int wakeup(TCB* tcb)
 		sched_make_ready(tcb);
 		ret = 1;		
 	}
+
 
 	Mutex_Unlock(& sched_spinlock);
 
@@ -410,34 +388,30 @@ void yield(enum SCHED_CAUSE cause)
   TCB* current = CURTHREAD;  /* Make a local copy of current process, for speed */
 
   int current_ready = 0;
-  
-  Mutex_Lock(& sched_spinlock);
 
-  if(current->state==RUNNING)
+  Mutex_Lock(& sched_spinlock);
+  switch(current->state)
   {
-     current->state = READY;
-     set_aging(current); 
-     set_priority(cause, current);
-  }
-  /* We were awakened before we managed to sleep! */
-  else if (current->state==READY)
-  {
-    current_ready = 1;
-  }
-  else if (current->state==STOPPED){}
-  else if (current->state== EXITED){}
-  else{
-      
+    case RUNNING:
+      current->state = READY;
+    case READY: /* We were awakened before we managed to sleep! */
+      current_ready = 1;
+      break;
+
+    case STOPPED:
+    case EXITED:
+      break; 
+
+    default:
       fprintf(stderr, "BAD STATE for current thread %p in yield: %d\n", current, current->state);
       assert(0);  /* It should not be READY or EXITED ! */
   }
 
   /* Get next */
   TCB* next = sched_queue_select();
-  
+
   /* Maybe there was nothing ready in the scheduler queue ? */
   if(next==NULL) {
-      //fprintf(stderr, "%s\n", );
     if(current_ready)
       next = current;
     else
@@ -455,9 +429,7 @@ void yield(enum SCHED_CAUSE cause)
     CURTHREAD = next;
     cpu_swap_context( & current->context , & next->context );
   }
-    // fprintf(stderr, "%s","\n\t\t\t\tPriority:" );
-    // fprintf(stderr, "%d", current->priority);
-    
+
   /* This is where we get after we are switched back on! A long time 
      may have passed. Start a new timeslice... 
    */
@@ -479,7 +451,6 @@ void yield(enum SCHED_CAUSE cause)
 
 void gain(int preempt)
 {
-
   Mutex_Lock(& sched_spinlock);
 
   /* Mark current state */
@@ -513,42 +484,9 @@ void gain(int preempt)
   if(preempt) preempt_on;
 
   /* Set a 1-quantum alarm */
-  bios_set_timer(QUANTUM/((current->priority)+1));
+  bios_set_timer(QUANTUM);
 }
 
-//allagmeno
-void set_priority(enum SCHED_CAUSE cause, TCB* tcb)
-{ 
-    // Boost condition
-  if( (tcb->aging)>BOOST_THRES && tcb->priority < MLFQ_SIZE-1 ){
-    
-    /* Boost priority and reset aging */
-    tcb->priority++; //set priority to minimum
-    tcb->aging = 0;
-  
-  }else{   
-      /* Check cause and set priority accordingly  */
-      
-      // Mutex-deadlock solution:
-      if((cause==SCHED_QUANTUM || cause == SCHED_MUTEX) && tcb->priority>0 ) (tcb->priority)--; 
-      else if(cause==SCHED_IO && tcb->priority<(MLFQ_SIZE-1)) (tcb->priority)++;
-  }
-   
-}
-
-void set_aging(TCB* tcb)
-{ 
-
-  /* Set aging of max priority thread to 0 and return */
-  if(tcb->priority==(MLFQ_SIZE-1)) (tcb->aging) = 0;
-  else
-  { /* Age low priority threads more*/
-    int aging_offset = ((MLFQ_SIZE-1) - (tcb->priority));
-    if(tcb->priority < (MLFQ_SIZE-1)) (tcb->aging) +=  (aging_offset); 
-  }
-
- 
-}
 
 static void idle_thread()
 {
@@ -572,9 +510,11 @@ static void idle_thread()
  */
 void initialize_scheduler()
 {
+  rlnode_init(&SCHED, NULL);
   rlnode_init(&TIMEOUT_LIST, NULL);
-  rlnode_array_init(MLFQ, NULL);
 }
+
+
 
 void run_scheduler()
 {
@@ -583,16 +523,11 @@ void run_scheduler()
   /* Initialize current CCB */
   curcore->id = cpu_core_id;
 
-  //allagmeno
-  PCB* zero_pcb = get_pcb(0);
-
   curcore->current_thread = & curcore->idle_thread;
-  curcore->idle_thread.owner_pcb = zero_pcb;
-  curcore->idle_thread.owner_ptcb = NULL;
+
+  curcore->idle_thread.owner_pcb = get_pcb(0);
   curcore->idle_thread.type = IDLE_THREAD;
   curcore->idle_thread.state = RUNNING;
-  curcore->idle_thread.priority = MLFQ_SIZE-1; //allagmeno
-  curcore->idle_thread.aging = 0;
   curcore->idle_thread.phase = CTX_DIRTY;
   curcore->idle_thread.wakeup_time = NO_TIMEOUT;
   rlnode_init(& curcore->idle_thread.sched_node, & curcore->idle_thread);
@@ -610,3 +545,5 @@ void run_scheduler()
   cpu_interrupt_handler(ALARM, NULL);
   cpu_interrupt_handler(ICI, NULL);
 }
+
+

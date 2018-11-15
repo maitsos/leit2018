@@ -550,7 +550,7 @@ static void PIC_daemon(uint serialno)
 		/* select will sleep for about SLOW_HZ usec (half the system_clock res.) */
 		struct timeval sleeptime = { .tv_sec=0, .tv_usec = SLOW_HZ };
 		int selcode = select(maxfd, &readfds, &writefds, NULL, &sleeptime);
-		
+
 		/* update system clock */
 		system_clock = get_coarse_time();
 

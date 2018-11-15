@@ -22,38 +22,38 @@ struct \hyperlink{structexception__stack__frame}{exception\+\_\+stack\+\_\+frame
 \subsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-\#define {\bfseries \+\_\+\+\_\+concatenate\+\_\+tokens}(x,  y)~x \#\# y\hypertarget{group__exceptions_gadf8cc03bd0ede7f3e5aafa57de5016dd}{}\label{group__exceptions_gadf8cc03bd0ede7f3e5aafa57de5016dd}
-
+\mbox{\Hypertarget{group__exceptions_gadf8cc03bd0ede7f3e5aafa57de5016dd}\label{group__exceptions_gadf8cc03bd0ede7f3e5aafa57de5016dd}} 
+\#define {\bfseries \+\_\+\+\_\+concatenate\+\_\+tokens}(x,  y)~x \#\# y
 \item 
-\#define {\bfseries \+\_\+\+\_\+conc}(z,  w)~\+\_\+\+\_\+concatenate\+\_\+tokens(z,w)\hypertarget{group__exceptions_ga0d2e02c74b05d3ff3bfa9eb3dcd891e3}{}\label{group__exceptions_ga0d2e02c74b05d3ff3bfa9eb3dcd891e3}
-
+\mbox{\Hypertarget{group__exceptions_ga0d2e02c74b05d3ff3bfa9eb3dcd891e3}\label{group__exceptions_ga0d2e02c74b05d3ff3bfa9eb3dcd891e3}} 
+\#define {\bfseries \+\_\+\+\_\+conc}(z,  w)~\+\_\+\+\_\+concatenate\+\_\+tokens(z,w)
 \end{DoxyCompactItemize}
 \subsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
-typedef void($\ast$ {\bfseries exception\+\_\+handler}) (int)\hypertarget{group__exceptions_ga07c60bc46505779b049ce597fe609258}{}\label{group__exceptions_ga07c60bc46505779b049ce597fe609258}
-
+\mbox{\Hypertarget{group__exceptions_ga07c60bc46505779b049ce597fe609258}\label{group__exceptions_ga07c60bc46505779b049ce597fe609258}} 
+typedef void($\ast$ {\bfseries exception\+\_\+handler}) (int)
 \item 
-typedef struct \hyperlink{structexception__stack__frame}{exception\+\_\+stack\+\_\+frame} $\ast$$\ast$ {\bfseries exception\+\_\+context}\hypertarget{group__exceptions_ga644495f4913e96a83cdf2779fd813974}{}\label{group__exceptions_ga644495f4913e96a83cdf2779fd813974}
-
+\mbox{\Hypertarget{group__exceptions_ga644495f4913e96a83cdf2779fd813974}\label{group__exceptions_ga644495f4913e96a83cdf2779fd813974}} 
+typedef struct \hyperlink{structexception__stack__frame}{exception\+\_\+stack\+\_\+frame} $\ast$$\ast$ {\bfseries exception\+\_\+context}
 \end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void {\bfseries raise\+\_\+exception} (\hyperlink{structexception__stack__frame}{exception\+\_\+context} context)\hypertarget{group__exceptions_ga7eda2653ee54e0c95e9d51b8fd873298}{}\label{group__exceptions_ga7eda2653ee54e0c95e9d51b8fd873298}
-
+\mbox{\Hypertarget{group__exceptions_ga7eda2653ee54e0c95e9d51b8fd873298}\label{group__exceptions_ga7eda2653ee54e0c95e9d51b8fd873298}} 
+void {\bfseries raise\+\_\+exception} (\hyperlink{structexception__stack__frame}{exception\+\_\+context} context)
 \item 
-void {\bfseries exception\+\_\+unwind} (\hyperlink{structexception__stack__frame}{exception\+\_\+context} context, int errcode)\hypertarget{group__exceptions_ga5232fee2c414c5ff1ff44dc28c83cf42}{}\label{group__exceptions_ga5232fee2c414c5ff1ff44dc28c83cf42}
-
+\mbox{\Hypertarget{group__exceptions_ga5232fee2c414c5ff1ff44dc28c83cf42}\label{group__exceptions_ga5232fee2c414c5ff1ff44dc28c83cf42}} 
+void {\bfseries exception\+\_\+unwind} (\hyperlink{structexception__stack__frame}{exception\+\_\+context} context, int errcode)
 \item 
-static void {\bfseries \+\_\+\+\_\+exc\+\_\+push\+\_\+frame} (\hyperlink{structexception__stack__frame}{exception\+\_\+context} context, struct \hyperlink{structexception__stack__frame}{exception\+\_\+stack\+\_\+frame} $\ast$frame)\hypertarget{group__exceptions_gad0ebd2587ae85b044e1306a026246a27}{}\label{group__exceptions_gad0ebd2587ae85b044e1306a026246a27}
-
+\mbox{\Hypertarget{group__exceptions_gad0ebd2587ae85b044e1306a026246a27}\label{group__exceptions_gad0ebd2587ae85b044e1306a026246a27}} 
+static void {\bfseries \+\_\+\+\_\+exc\+\_\+push\+\_\+frame} (\hyperlink{structexception__stack__frame}{exception\+\_\+context} context, struct \hyperlink{structexception__stack__frame}{exception\+\_\+stack\+\_\+frame} $\ast$frame)
 \item 
-static struct \hyperlink{structexception__stack__frame}{exception\+\_\+stack\+\_\+frame} $\ast$ {\bfseries \+\_\+\+\_\+exc\+\_\+try} (\hyperlink{structexception__stack__frame}{exception\+\_\+context} context, int errcode)\hypertarget{group__exceptions_ga47cfe7a060b16ac1cd9a4432853205dc}{}\label{group__exceptions_ga47cfe7a060b16ac1cd9a4432853205dc}
-
+\mbox{\Hypertarget{group__exceptions_ga47cfe7a060b16ac1cd9a4432853205dc}\label{group__exceptions_ga47cfe7a060b16ac1cd9a4432853205dc}} 
+static struct \hyperlink{structexception__stack__frame}{exception\+\_\+stack\+\_\+frame} $\ast$ {\bfseries \+\_\+\+\_\+exc\+\_\+try} (\hyperlink{structexception__stack__frame}{exception\+\_\+context} context, int errcode)
 \item 
-static struct \hyperlink{structexception__stack__frame}{exception\+\_\+stack\+\_\+frame} $\ast$ {\bfseries \+\_\+\+\_\+exc\+\_\+exit\+\_\+try} (\hyperlink{structexception__stack__frame}{exception\+\_\+context} context)\hypertarget{group__exceptions_ga9d85149bdb927245ff694068119412df}{}\label{group__exceptions_ga9d85149bdb927245ff694068119412df}
-
+\mbox{\Hypertarget{group__exceptions_ga9d85149bdb927245ff694068119412df}\label{group__exceptions_ga9d85149bdb927245ff694068119412df}} 
+static struct \hyperlink{structexception__stack__frame}{exception\+\_\+stack\+\_\+frame} $\ast$ {\bfseries \+\_\+\+\_\+exc\+\_\+exit\+\_\+try} (\hyperlink{structexception__stack__frame}{exception\+\_\+context} context)
 \end{DoxyCompactItemize}
 
 

@@ -1,11 +1,9 @@
 
 #include <assert.h>
-#include <unistd.h>
 #include "kernel_cc.h"
 #include "kernel_proc.h"
 #include "kernel_streams.h"
-#include "kernel_sched.h"
-#include "tinyos.h"
+
 
 /* 
  The process table and related system calls:
@@ -34,14 +32,13 @@ Pid_t get_pid(PCB* pcb)
 /* Initialize a PCB */
 static inline void initialize_PCB(PCB* pcb)
 {
-  pcb->pstate = FREE; // (*pcb).pstate 
+  pcb->pstate = FREE;
   pcb->argl = 0;
   pcb->args = NULL;
 
   for(int i=0;i<MAX_FILEID;i++)
     pcb->FIDT[i] = NULL;
 
-  rlnode_init(& pcb->PTCB_list, NULL); //allagmeno
   rlnode_init(& pcb->children_list, NULL);
   rlnode_init(& pcb->exited_list, NULL);
   rlnode_init(& pcb->children_node, pcb);
@@ -117,7 +114,6 @@ void release_PCB(PCB* pcb)
 */
 void start_main_thread()
 {
-  
   int exitval;
 
   Task call =  CURPROC->main_task;
@@ -126,20 +122,6 @@ void start_main_thread()
 
   exitval = call(argl,args);
   Exit(exitval);
-}
-
-//allagmeno
-void start_PTCB_thread()
-{ 
-  int exitval;
-
-  Task call =  CURPTHREAD->main_task;
-  int argl = CURPTHREAD->argl;
-  void* args = CURPTHREAD->args;
-  exitval = call(argl,args);
- 
-  // allagmeno
-  ThreadExit(exitval);  
 }
 
 
@@ -177,6 +159,7 @@ Pid_t sys_Exec(Task call, int argl, void* args)
     }
   }
 
+
   /* Set the main thread's function */
   newproc->main_task = call;
 
@@ -194,21 +177,9 @@ Pid_t sys_Exec(Task call, int argl, void* args)
     we do, because once we wakeup the new thread it may run! so we need to have finished
     the initialization of the PCB.
    */
-  
-  //allagmeno2
   if(call != NULL) {
-     
-     // Create main PTCB 
-     newproc->main_ptcb = create_PTCB(call,argl,args, newproc);
-     
-     // Create main PTCB's main thread
-     newproc->main_ptcb->main_thread = spawn_thread(newproc, start_main_thread); 
-     
-     // Create main PTCB as owner of its main thread
-     newproc->main_ptcb->main_thread->owner_ptcb = newproc->main_ptcb;
-     
-     wakeup(newproc->main_ptcb->main_thread);
-     newproc->main_ptcb->ref_counter=0;
+    newproc->main_thread = spawn_thread(newproc, start_main_thread);
+    wakeup(newproc->main_thread);
   }
 
 
@@ -313,21 +284,12 @@ Pid_t sys_WaitChild(Pid_t cpid, int* status)
 void sys_Exit(int exitval)
 {
   /* Right here, we must check that we are not the boot task. If we are, 
-   we must wait until all processes exit. */
+     we must wait until all processes exit. */
   if(sys_GetPid()==1) {
     while(sys_WaitChild(NOPROC,NULL)!=NOPROC);
   }
 
   PCB *curproc = CURPROC;  /* cache for efficiency */
-
-  //allagmeno 
-  /* Empty PTCB_list in case ThreadJoin() wasn't called before sys_Exit()*/
-  //while(!is_rlist_empty(& curproc->PTCB_list))
-  //{
- //   rlnode* ptcb_node = rlist_pop_front(& curproc->PTCB_list);
-  //  delete_PTCB(ptcb_node->obj);
-  //}
-
 
   /* Do all the other cleanup we want here, close files etc. */
   if(curproc->args) {

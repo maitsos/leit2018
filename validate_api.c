@@ -947,7 +947,7 @@ BOOT_TEST(test_exit_many_threads,
 {
 
 	int task(int argl, void* args) {
-		fibo(25);
+		fibo(45);
 		return 2;
 	}
 

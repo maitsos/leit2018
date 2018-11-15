@@ -15,8 +15,6 @@
   This file contains a number of example programs for tinyos.
 */
 
-//allagmeno
-int boost_param;
 
 void adjust_symposium(symposium_t* symp, int dBASE, int dGAP)
 {
@@ -131,6 +129,8 @@ void SymposiumTable_philosopher(SymposiumTable* S, int i)
   Mutex_Unlock(& S->mx);
 }
 
+
+
 void SymposiumTable_init(SymposiumTable* table, symposium_t* symp)
 {
 	table->symp = symp;
@@ -149,6 +149,8 @@ void SymposiumTable_destroy(SymposiumTable* table)
 	free(table->hungry);
 }
 
+
+
 typedef struct { int i; SymposiumTable* S; } philosopher_args;
 
 /* Philosopher process */
@@ -166,15 +168,9 @@ int PhilosopherProcess(int argl, void* args)
  */
 int SymposiumOfProcesses(int argl, void* args)
 {
-  //allagmeno 
-  
   assert(argl == sizeof(symposium_t));
   symposium_t* symp = args;
   int N = symp->N;
-
-  // Set boost_param as number of philosophers 
-  boost_param = N;  
-  fprintf(stderr, "%s%d\n", "boost_param:", boost_param );
 
   /* Initialize structures */
   SymposiumTable S;
@@ -228,8 +224,11 @@ int SymposiumOfThreads(int argl, void* args)
 	for(int i=0;i<N;i++) {
 		ThreadJoin(thread[i],NULL);
 	}
-  
+
 	SymposiumTable_destroy(&S);
 
 	return 0;
 }
+
+
+

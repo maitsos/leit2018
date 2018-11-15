@@ -10,8 +10,6 @@
 #include <setjmp.h>
 #include <assert.h>
 
-#include "tinyos.h"
-
 /**
 	@file util.h
 
@@ -285,7 +283,7 @@ static inline void * xmalloc (size_t size)
 	@{
  */
 
-typedef struct process_thread_control_block PTCB; //allagmeno
+
 typedef struct process_control_block PCB;	/**< @brief Forward declaration */
 typedef struct thread_control_block TCB;	/**< @brief Forward declaration */
 typedef struct core_control_block CCB;		/**< @brief Forward declaration */
@@ -311,8 +309,7 @@ typedef struct resource_list_node {
      \endcode
      */
   union {
-    PCB* pcb;
-    PTCB* ptcb; 
+    PCB* pcb; 
     TCB* tcb;
     CCB* ccb;
     DCB* dcb;
@@ -369,13 +366,6 @@ static inline rlnode* rlnode_init(rlnode* p, void* ptr)
 	return p;
 }
 
-//allagmeno
-static inline rlnode* rlnode_array_init(rlnode* p, void* ptr)
-{
-	for(int i = 0; i < MLFQ_SIZE ; i++)
-		rlnode_new(&p[i])->obj = ptr; 
-	return p;
-}
 
 /** 
 	@brief Swap two pointers to rlnode.

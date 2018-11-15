@@ -46,16 +46,22 @@ The device model of tinyos3 is similar to that of Unix. Each device is designate
 The device table lists the devices by major number, and gives the number of devices for this type. It also contains a pointer to a file\+\_\+ops object, which contains driver routines for this device. 
 
 \subsection{Typedef Documentation}
+\mbox{\Hypertarget{group__dev_gaf0e2d4a982667466d84f6fb7522611d6}\label{group__dev_gaf0e2d4a982667466d84f6fb7522611d6}} 
 \index{Devices@{Devices}!D\+CB@{D\+CB}}
 \index{D\+CB@{D\+CB}!Devices@{Devices}}
-\subsubsection[{\texorpdfstring{D\+CB}{DCB}}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf device\+\_\+control\+\_\+block}  {\bf D\+CB}}\hypertarget{group__dev_gaf0e2d4a982667466d84f6fb7522611d6}{}\label{group__dev_gaf0e2d4a982667466d84f6fb7522611d6}
+\subsubsection{\texorpdfstring{D\+CB}{DCB}}
+{\footnotesize\ttfamily typedef struct \hyperlink{structdevice__control__block}{device\+\_\+control\+\_\+block}  \hyperlink{group__dev_gaf0e2d4a982667466d84f6fb7522611d6}{D\+CB}}
+
 
 
 Device control block. 
 
-These objects hold the information that is needed to access a particular device. \index{Devices@{Devices}!file\+\_\+ops@{file\+\_\+ops}}
+These objects hold the information that is needed to access a particular device. \mbox{\Hypertarget{group__dev_gaab625d8ae3a95e942ed10ed1579f5042}\label{group__dev_gaab625d8ae3a95e942ed10ed1579f5042}} 
+\index{Devices@{Devices}!file\+\_\+ops@{file\+\_\+ops}}
 \index{file\+\_\+ops@{file\+\_\+ops}!Devices@{Devices}}
-\subsubsection[{\texorpdfstring{file\+\_\+ops}{file_ops}}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf file\+\_\+operations}  {\bf file\+\_\+ops}}\hypertarget{group__dev_gaab625d8ae3a95e942ed10ed1579f5042}{}\label{group__dev_gaab625d8ae3a95e942ed10ed1579f5042}
+\subsubsection{\texorpdfstring{file\+\_\+ops}{file\_ops}}
+{\footnotesize\ttfamily typedef struct \hyperlink{structfile__operations}{file\+\_\+operations}  \hyperlink{group__dev_gaab625d8ae3a95e942ed10ed1579f5042}{file\+\_\+ops}}
+
 
 
 The device-\/specific file operations table. 
@@ -68,24 +74,30 @@ The first argument of each method is taken from the \textquotesingle{}streamobj\
 
 
 \subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{group__dev_ga879ceac20e83b2375e5b49f4379b0c90}\label{group__dev_ga879ceac20e83b2375e5b49f4379b0c90}} 
 \index{Devices@{Devices}!Device\+\_\+type@{Device\+\_\+type}}
 \index{Device\+\_\+type@{Device\+\_\+type}!Devices@{Devices}}
-\subsubsection[{\texorpdfstring{Device\+\_\+type}{Device_type}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Device\+\_\+type}}\hypertarget{group__dev_ga879ceac20e83b2375e5b49f4379b0c90}{}\label{group__dev_ga879ceac20e83b2375e5b49f4379b0c90}
+\subsubsection{\texorpdfstring{Device\+\_\+type}{Device\_type}}
+{\footnotesize\ttfamily enum \hyperlink{group__dev_ga879ceac20e83b2375e5b49f4379b0c90}{Device\+\_\+type}}
+
 
 
 The device type. 
 
-The device type of a device determines the driver used. \begin{Desc}
-\item[Enumerator]\par
-\begin{description}
-\index{D\+E\+V\+\_\+\+N\+U\+LL@{D\+E\+V\+\_\+\+N\+U\+LL}!Devices@{Devices}}\index{Devices@{Devices}!D\+E\+V\+\_\+\+N\+U\+LL@{D\+E\+V\+\_\+\+N\+U\+LL}}\item[{\em 
-D\+E\+V\+\_\+\+N\+U\+LL\hypertarget{group__dev_gga879ceac20e83b2375e5b49f4379b0c90a8ca9ed7c2fc080b6706582ccf828b08f}{}\label{group__dev_gga879ceac20e83b2375e5b49f4379b0c90a8ca9ed7c2fc080b6706582ccf828b08f}
-}]Null device \index{D\+E\+V\+\_\+\+S\+E\+R\+I\+AL@{D\+E\+V\+\_\+\+S\+E\+R\+I\+AL}!Devices@{Devices}}\index{Devices@{Devices}!D\+E\+V\+\_\+\+S\+E\+R\+I\+AL@{D\+E\+V\+\_\+\+S\+E\+R\+I\+AL}}\item[{\em 
-D\+E\+V\+\_\+\+S\+E\+R\+I\+AL\hypertarget{group__dev_gga879ceac20e83b2375e5b49f4379b0c90adb43c91cf279ccd4510abaed9425bacc}{}\label{group__dev_gga879ceac20e83b2375e5b49f4379b0c90adb43c91cf279ccd4510abaed9425bacc}
-}]Serial device \index{D\+E\+V\+\_\+\+M\+AX@{D\+E\+V\+\_\+\+M\+AX}!Devices@{Devices}}\index{Devices@{Devices}!D\+E\+V\+\_\+\+M\+AX@{D\+E\+V\+\_\+\+M\+AX}}\item[{\em 
-D\+E\+V\+\_\+\+M\+AX\hypertarget{group__dev_gga879ceac20e83b2375e5b49f4379b0c90a4d07dfbc7e68d26e2d92773a37381ce7}{}\label{group__dev_gga879ceac20e83b2375e5b49f4379b0c90a4d07dfbc7e68d26e2d92773a37381ce7}
-}]placeholder for maximum device number \end{description}
-\end{Desc}
+The device type of a device determines the driver used. \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{D\+E\+V\+\_\+\+N\+U\+LL@{D\+E\+V\+\_\+\+N\+U\+LL}!Devices@{Devices}}\index{Devices@{Devices}!D\+E\+V\+\_\+\+N\+U\+LL@{D\+E\+V\+\_\+\+N\+U\+LL}}}\mbox{\Hypertarget{group__dev_gga879ceac20e83b2375e5b49f4379b0c90a8ca9ed7c2fc080b6706582ccf828b08f}\label{group__dev_gga879ceac20e83b2375e5b49f4379b0c90a8ca9ed7c2fc080b6706582ccf828b08f}} 
+D\+E\+V\+\_\+\+N\+U\+LL&Null device \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{D\+E\+V\+\_\+\+S\+E\+R\+I\+AL@{D\+E\+V\+\_\+\+S\+E\+R\+I\+AL}!Devices@{Devices}}\index{Devices@{Devices}!D\+E\+V\+\_\+\+S\+E\+R\+I\+AL@{D\+E\+V\+\_\+\+S\+E\+R\+I\+AL}}}\mbox{\Hypertarget{group__dev_gga879ceac20e83b2375e5b49f4379b0c90adb43c91cf279ccd4510abaed9425bacc}\label{group__dev_gga879ceac20e83b2375e5b49f4379b0c90adb43c91cf279ccd4510abaed9425bacc}} 
+D\+E\+V\+\_\+\+S\+E\+R\+I\+AL&Serial device \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{D\+E\+V\+\_\+\+M\+AX@{D\+E\+V\+\_\+\+M\+AX}!Devices@{Devices}}\index{Devices@{Devices}!D\+E\+V\+\_\+\+M\+AX@{D\+E\+V\+\_\+\+M\+AX}}}\mbox{\Hypertarget{group__dev_gga879ceac20e83b2375e5b49f4379b0c90a4d07dfbc7e68d26e2d92773a37381ce7}\label{group__dev_gga879ceac20e83b2375e5b49f4379b0c90a4d07dfbc7e68d26e2d92773a37381ce7}} 
+D\+E\+V\+\_\+\+M\+AX&placeholder for maximum device number \\
+\hline
+
+\end{DoxyEnumFields}
 
 
 Definition at line 104 of file kernel\+\_\+dev.\+h.
@@ -93,13 +105,12 @@ Definition at line 104 of file kernel\+\_\+dev.\+h.
 
 
 \subsection{Function Documentation}
+\mbox{\Hypertarget{group__dev_ga0808cf584a510e0eff6908a5313ce296}\label{group__dev_ga0808cf584a510e0eff6908a5313ce296}} 
 \index{Devices@{Devices}!device\+\_\+no@{device\+\_\+no}}
 \index{device\+\_\+no@{device\+\_\+no}!Devices@{Devices}}
-\subsubsection[{\texorpdfstring{device\+\_\+no(\+Device\+\_\+type major)}{device_no(Device_type major)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint} device\+\_\+no (
-\begin{DoxyParamCaption}
-\item[{{\bf Device\+\_\+type}}]{major}
-\end{DoxyParamCaption}
-)}\hypertarget{group__dev_ga0808cf584a510e0eff6908a5313ce296}{}\label{group__dev_ga0808cf584a510e0eff6908a5313ce296}
+\subsubsection{\texorpdfstring{device\+\_\+no()}{device\_no()}}
+{\footnotesize\ttfamily \hyperlink{bios_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} device\+\_\+no (\begin{DoxyParamCaption}\item[{\hyperlink{group__dev_ga879ceac20e83b2375e5b49f4379b0c90}{Device\+\_\+type}}]{major }\end{DoxyParamCaption})}
+
 
 
 Get the number of devices of a particular major number. 
@@ -108,16 +119,12 @@ The number of devices M determines the legal range of minor numbers, namely 0$<$
 
 Definition at line 231 of file kernel\+\_\+dev.\+c.
 
+\mbox{\Hypertarget{group__dev_ga6d8e08550640c9819aa07b6bba9fa6ed}\label{group__dev_ga6d8e08550640c9819aa07b6bba9fa6ed}} 
 \index{Devices@{Devices}!device\+\_\+open@{device\+\_\+open}}
 \index{device\+\_\+open@{device\+\_\+open}!Devices@{Devices}}
-\subsubsection[{\texorpdfstring{device\+\_\+open(\+Device\+\_\+type major, uint minor, void $\ast$$\ast$obj, file\+\_\+ops $\ast$$\ast$ops)}{device_open(Device_type major, uint minor, void **obj, file_ops **ops)}}]{\setlength{\rightskip}{0pt plus 5cm}int device\+\_\+open (
-\begin{DoxyParamCaption}
-\item[{{\bf Device\+\_\+type}}]{major, }
-\item[{{\bf uint}}]{minor, }
-\item[{void $\ast$$\ast$}]{obj, }
-\item[{{\bf file\+\_\+ops} $\ast$$\ast$}]{ops}
-\end{DoxyParamCaption}
-)}\hypertarget{group__dev_ga6d8e08550640c9819aa07b6bba9fa6ed}{}\label{group__dev_ga6d8e08550640c9819aa07b6bba9fa6ed}
+\subsubsection{\texorpdfstring{device\+\_\+open()}{device\_open()}}
+{\footnotesize\ttfamily int device\+\_\+open (\begin{DoxyParamCaption}\item[{\hyperlink{group__dev_ga879ceac20e83b2375e5b49f4379b0c90}{Device\+\_\+type}}]{major,  }\item[{\hyperlink{bios_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}}]{minor,  }\item[{void $\ast$$\ast$}]{obj,  }\item[{\hyperlink{group__dev_gaab625d8ae3a95e942ed10ed1579f5042}{file\+\_\+ops} $\ast$$\ast$}]{ops }\end{DoxyParamCaption})}
+
 
 
 Open a device. 
@@ -128,13 +135,12 @@ It returns 0 on success and -\/1 on failure.
 
 Definition at line 221 of file kernel\+\_\+dev.\+c.
 
+\mbox{\Hypertarget{group__dev_ga840b5c2460abea4a19a201f7d6d035c8}\label{group__dev_ga840b5c2460abea4a19a201f7d6d035c8}} 
 \index{Devices@{Devices}!initialize\+\_\+devices@{initialize\+\_\+devices}}
 \index{initialize\+\_\+devices@{initialize\+\_\+devices}!Devices@{Devices}}
-\subsubsection[{\texorpdfstring{initialize\+\_\+devices()}{initialize_devices()}}]{\setlength{\rightskip}{0pt plus 5cm}void initialize\+\_\+devices (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}\hypertarget{group__dev_ga840b5c2460abea4a19a201f7d6d035c8}{}\label{group__dev_ga840b5c2460abea4a19a201f7d6d035c8}
+\subsubsection{\texorpdfstring{initialize\+\_\+devices()}{initialize\_devices()}}
+{\footnotesize\ttfamily void initialize\+\_\+devices (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
 
 
 Initialization for devices. 
