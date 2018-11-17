@@ -367,6 +367,21 @@ static inline rlnode* rlnode_init(rlnode* p, void* ptr)
 }
 
 
+	/**************TWEAKS**************/
+#define PRIORITY_LEVELS 5 /* The size of the array of queues == The number of priority levels */
+
+/* Initialize an array rlnodes*/
+static inline rlnode* rlnode_array_init(rlnode* p, void* ptr)
+{
+	for (i=0 ; i<(PRIORITY_LEVELS-1) ; i++){
+	  rlnode_new(p[i])->obj = ptr;
+	}
+	return p;
+} 
+	/***************END****************/
+
+
+
 /** 
 	@brief Swap two pointers to rlnode.
 */

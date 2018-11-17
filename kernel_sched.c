@@ -136,6 +136,11 @@ TCB* spawn_thread(PCB* pcb, void (*func)())
   rlnode_init(& tcb->sched_node, tcb);  /* Intrusive list node */
 
 
+	/**************TWEAKS**************/
+  tcb->priority = 0;	// Highest priority == 0  lowest priority == 5
+	/***************END****************/
+
+
   /* Compute the stack segment address and size */
   void* sp = ((void*)tcb) + THREAD_TCB_SIZE;
 
@@ -200,7 +205,7 @@ CCB cctx[MAX_CORES];
 */
 
 
-rlnode SCHED;                         /* The scheduler queue */
+rlnode SCHED[PRIORITY_LEVELS];                         /* TWEAK. The scheduler array of queues */
 rlnode TIMEOUT_LIST;				  /* The list of threads with a timeout */
 Mutex sched_spinlock = MUTEX_INIT;    /* spinlock for scheduler queue */
 
@@ -251,7 +256,7 @@ static void sched_register_timeout(TCB* tcb, TimerDuration timeout)
 static void sched_queue_add(TCB* tcb)
 {
   /* Insert at the end of the scheduling list */
-  rlist_push_back(& SCHED, & tcb->sched_node);
+  rlist_push_back(& SCHED[tcb->priority], & tcb->sched_node); /* TWEAK */
 
   /* Restart possibly halted cores */
   cpu_core_restart_one();
@@ -302,10 +307,17 @@ static TCB* sched_queue_select()
   		sched_make_ready(tcb);
   }
 
+
+	/****************TWEAKS*****************/
+  int i = 0;
+  while( ( i<=(PRIORITY_LEVELS - 1) ) && (is_rlist_empty(&SCHED[i]) ){
+	i++;
+  }
   /* Get the head of the SCHED list */
-  rlnode * sel = rlist_pop_front(& SCHED);
+  rlnode * sel = rlist_pop_front(& SCHED[i]);
 
   return sel->tcb;  /* When the list is empty, this is NULL */
+	/*****************END*******************/
 } 
 
 
@@ -375,6 +387,24 @@ void sleep_releasing(Thread_state state, Mutex* mx, enum SCHED_CAUSE cause, Time
 }
 
 
+
+	/****************TWEAKS*****************/
+void promote(TCB* tcb)
+{
+  if(tcb->priority > 0) tcb->priority--;
+  sched_queue_add(tcb);
+}
+
+
+void demote(TCB* tcb)
+{
+  if(tcb->priority < (PRIORITY_LEVELS-1) ) tcb->priority--;
+  sched_queue_add(tcb);
+}
+	/*****************END*******************/
+
+
+
 /* This function is the entry point to the scheduler's context switching */
 
 void yield(enum SCHED_CAUSE cause)
@@ -394,6 +424,24 @@ void yield(enum SCHED_CAUSE cause)
   {
     case RUNNING:
       current->state = READY;
+      switch(cause)		/* TWEAKS */
+      {
+	case SCHED_IO:
+	  promote(current);
+	  break;
+	
+	case SCHED_QUANTUM:
+	  demote(current);
+	  break;	
+	
+	case SCHED_MUTEX:
+	case SCHED_PIPE:
+	case SCHED_POLL:
+	case SCHED_IDLE:
+	case SCHED_USER:
+	  break;		/* END */
+
+
     case READY: /* We were awakened before we managed to sleep! */
       current_ready = 1;
       break;
@@ -483,8 +531,8 @@ void gain(int preempt)
   /* Reset preemption as needed */
   if(preempt) preempt_on;
 
-  /* Set a 1-quantum alarm */
-  bios_set_timer(QUANTUM);
+  /* Set a 1-quantum alarm *TWEAKS* */
+  bios_set_timer(QUANTUM * (((current->priority)+1) / PRIORITY_LEVELS) );
 }
 
 
@@ -510,7 +558,7 @@ static void idle_thread()
  */
 void initialize_scheduler()
 {
-  rlnode_init(&SCHED, NULL);
+  rlnode_array_init(&SCHED, NULL); 		/* TWEAKS */
   rlnode_init(&TIMEOUT_LIST, NULL);
 }
 
@@ -531,7 +579,9 @@ void run_scheduler()
   curcore->idle_thread.phase = CTX_DIRTY;
   curcore->idle_thread.wakeup_time = NO_TIMEOUT;
   rlnode_init(& curcore->idle_thread.sched_node, & curcore->idle_thread);
-
+  
+  curcore->idle_thread.priority = 0; /* TWEAKS */
+  
   /* Initialize interrupt handler */
   cpu_interrupt_handler(ALARM, yield_handler);
   cpu_interrupt_handler(ICI, ici_handler);

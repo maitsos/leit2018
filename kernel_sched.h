@@ -85,6 +85,8 @@ enum SCHED_CAUSE {
   An object of this type is associated to every thread. In this object
   are stored all the metadata that relate to the thread.
 */
+
+
 typedef struct thread_control_block
 {
   PCB* owner_pcb;       /**< This is null for a free TCB */
@@ -98,6 +100,12 @@ typedef struct thread_control_block
   Thread_type type;       /**< The type of thread */
   Thread_state state;    /**< The state of the thread */
   Thread_phase phase;    /**< The phase of the thread */
+
+
+	/**************TWEAKS**************/
+  int priority;
+	/***************END****************/
+
 
   void (*thread_func)();   /**< The function executed by this thread */
 
